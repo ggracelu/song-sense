@@ -1,0 +1,326 @@
+<div>
+  <div>
+    <h1>
+      Playlist #<%= @the_playlist.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/playlists">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_playlist/<%= @the_playlist.id %>">
+          Delete playlist
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Song1
+      </dt>
+      <dd>
+        <%= @the_playlist.song1 %>
+      </dd>
+
+      <dt>
+        Song2
+      </dt>
+      <dd>
+        <%= @the_playlist.song2 %>
+      </dd>
+
+      <dt>
+        Song3
+      </dt>
+      <dd>
+        <%= @the_playlist.song3 %>
+      </dd>
+
+      <dt>
+        Song4
+      </dt>
+      <dd>
+        <%= @the_playlist.song4 %>
+      </dd>
+
+      <dt>
+        Song5
+      </dt>
+      <dd>
+        <%= @the_playlist.song5 %>
+      </dd>
+
+      <dt>
+        Song6
+      </dt>
+      <dd>
+        <%= @the_playlist.song6 %>
+      </dd>
+
+      <dt>
+        Song7
+      </dt>
+      <dd>
+        <%= @the_playlist.song7 %>
+      </dd>
+
+      <dt>
+        Song8
+      </dt>
+      <dd>
+        <%= @the_playlist.song8 %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_playlist.user_id %>
+      </dd>
+
+      <dt>
+        Color1
+      </dt>
+      <dd>
+        <%= @the_playlist.color1 %>
+      </dd>
+
+      <dt>
+        Color2
+      </dt>
+      <dd>
+        <%= @the_playlist.color2 %>
+      </dd>
+
+      <dt>
+        Color3
+      </dt>
+      <dd>
+        <%= @the_playlist.color3 %>
+      </dd>
+
+      <dt>
+        Color4
+      </dt>
+      <dd>
+        <%= @the_playlist.color4 %>
+      </dd>
+
+      <dt>
+        Color5
+      </dt>
+      <dd>
+        <%= @the_playlist.color5 %>
+      </dd>
+
+      <dt>
+        Scent1
+      </dt>
+      <dd>
+        <%= @the_playlist.scent1 %>
+      </dd>
+
+      <dt>
+        Scent2
+      </dt>
+      <dd>
+        <%= @the_playlist.scent2 %>
+      </dd>
+
+      <dt>
+        Texture
+      </dt>
+      <dd>
+        <%= @the_playlist.texture %>
+      </dd>
+
+      <dt>
+        Likes count
+      </dt>
+      <dd>
+        <%= @the_playlist.likes_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_playlist.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_playlist.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit playlist
+    </h2>
+
+    <form action="/modify_playlist/<%= @the_playlist.id %>"  method="post" >
+      <div>
+        <label for="song1_box">
+          Song1
+        </label>
+
+        <input type="text" id="song1_box" name="query_song1" value="<%= @the_playlist.song1 %>">
+      </div>
+
+      <div>
+        <label for="song2_box">
+          Song2
+        </label>
+
+        <input type="text" id="song2_box" name="query_song2" value="<%= @the_playlist.song2 %>">
+      </div>
+
+      <div>
+        <label for="song3_box">
+          Song3
+        </label>
+
+        <input type="text" id="song3_box" name="query_song3" value="<%= @the_playlist.song3 %>">
+      </div>
+
+      <div>
+        <label for="song4_box">
+          Song4
+        </label>
+
+        <input type="text" id="song4_box" name="query_song4" value="<%= @the_playlist.song4 %>">
+      </div>
+
+      <div>
+        <label for="song5_box">
+          Song5
+        </label>
+
+        <input type="text" id="song5_box" name="query_song5" value="<%= @the_playlist.song5 %>">
+      </div>
+
+      <div>
+        <label for="song6_box">
+          Song6
+        </label>
+
+        <input type="text" id="song6_box" name="query_song6" value="<%= @the_playlist.song6 %>">
+      </div>
+
+      <div>
+        <label for="song7_box">
+          Song7
+        </label>
+
+        <input type="text" id="song7_box" name="query_song7" value="<%= @the_playlist.song7 %>">
+      </div>
+
+      <div>
+        <label for="song8_box">
+          Song8
+        </label>
+
+        <input type="text" id="song8_box" name="query_song8" value="<%= @the_playlist.song8 %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_playlist.user_id %>">
+      </div>
+
+      <div>
+        <label for="color1_box">
+          Color1
+        </label>
+
+        <input type="text" id="color1_box" name="query_color1" value="<%= @the_playlist.color1 %>">
+      </div>
+
+      <div>
+        <label for="color2_box">
+          Color2
+        </label>
+
+        <input type="text" id="color2_box" name="query_color2" value="<%= @the_playlist.color2 %>">
+      </div>
+
+      <div>
+        <label for="color3_box">
+          Color3
+        </label>
+
+        <input type="text" id="color3_box" name="query_color3" value="<%= @the_playlist.color3 %>">
+      </div>
+
+      <div>
+        <label for="color4_box">
+          Color4
+        </label>
+
+        <input type="text" id="color4_box" name="query_color4" value="<%= @the_playlist.color4 %>">
+      </div>
+
+      <div>
+        <label for="color5_box">
+          Color5
+        </label>
+
+        <input type="text" id="color5_box" name="query_color5" value="<%= @the_playlist.color5 %>">
+      </div>
+
+      <div>
+        <label for="scent1_box">
+          Scent1
+        </label>
+
+        <input type="text" id="scent1_box" name="query_scent1" value="<%= @the_playlist.scent1 %>">
+      </div>
+
+      <div>
+        <label for="scent2_box">
+          Scent2
+        </label>
+
+        <input type="text" id="scent2_box" name="query_scent2" value="<%= @the_playlist.scent2 %>">
+      </div>
+
+      <div>
+        <label for="texture_box">
+          Texture
+        </label>
+
+        <input type="text" id="texture_box" name="query_texture" value="<%= @the_playlist.texture %>">
+      </div>
+
+      <div>
+        <label for="likes_count_box">
+          Likes count
+        </label>
+
+        <input type="text" id="likes_count_box" name="query_likes_count" value="<%= @the_playlist.likes_count %>">
+      </div>
+
+      <button>
+        Update playlist
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
