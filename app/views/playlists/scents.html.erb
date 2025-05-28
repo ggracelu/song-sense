@@ -1,0 +1,144 @@
+<style>
+  /* OUTER GRADIENT FRAME (fills screen) */
+  .scent-gradient-frame {
+    position: relative;
+    z-index: 0;
+    padding: 6vh 6vw;
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .scent-gradient-frame::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, <%= [@playlist.color1, @playlist.color2, @playlist.color3, @playlist.color4, @playlist.color5].compact.join(', ') %>);
+    background-size: 300% 300%;
+    animation: spin-gradient 6s linear infinite;
+  }
+
+  /* BLACK INNER CONTAINER */
+  .scent-container {
+    background-color: black;
+    color: white;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .scent-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  .scent-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scent-option input[type="checkbox"] {
+    display: none;
+  }
+
+  .scent-option label img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .scent-option input[type="checkbox"]:checked + label img {
+    filter: grayscale(0%);
+  }
+
+  .scent-option label img:hover {
+    filter: grayscale(40%);
+  }
+
+  .scent-label {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    width: 100px;
+    text-align: center;
+  }
+
+  .submit-button {
+    margin-top: 2rem;
+  }
+
+  @keyframes spin-gradient {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>
+
+<div class="scent-gradient-frame">
+  <div class="scent-container">
+    <h1 class="text-3xl font-semibold mb-4">Now, tell me what you want your playlist to smell like.</h1>
+    <p class="text-lg mb-8">Select 2 scents</p>
+
+    <form action="/playlists/<%= @playlist.id %>/scents" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <% scents = [
+        "Vanilla", "Lavender", "Coconut", "Sandalwood", "Rain",
+        "Citrus zest", "Green tea", "Coffee", "Leather", "Gasoline"
+      ] %>
+
+      <div class="scent-grid">
+        <% scents.each_with_index do |scent, index| %>
+          <div class="scent-option">
+            <input type="checkbox"
+                   id="scent_<%= index %>"
+                   name="scent<%= index < 5 ? 1 : 2 %>"
+                   value="<%= scent %>"
+                   class="scent-checkbox" />
+
+            <label for="scent_<%= index %>">
+              <%= image_tag("scents/#{scent.parameterize}.jpg", alt: scent) %>
+            </label>
+
+            <div class="scent-label"><%= scent %></div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="submit-button">
+        <button type="submit" class="btn-next">
+          Next →
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(".scent-checkbox");
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        const selected = [...checkboxes].filter(c => c.checked);
+        checkboxes.forEach(c => c.disabled = selected.length >= 2 && !c.checked);
+      });
+    });
+  });
+</script>

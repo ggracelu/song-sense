@@ -1,0 +1,27 @@
+<div class="homepage-container">
+  <div class="homepage-content">
+    <div class="title-stack">
+      <h1 class="homepage-title outlined">SongSense</h1>
+      <h1 class="homepage-title filled">SongSense</h1>
+      <h1 class="homepage-title outlined">SongSense</h1>
+    </div>
+
+
+    <p class="homepage-subtitle">Your senses. Your soundtrack.</p>
+    <p class="homepage-subtitle-secondary">
+      Ever wonder what it would be like to have synesthesia? Choose some colors, scents, and textures, and let me create a custom playlist for you.
+    </p>
+
+    <% if user_signed_in? %>
+      <div class="button-row">
+        <%= link_to "Create New Playlist", "/start", class: "homepage-button" %>
+      </div>
+    <% else %>
+      <div class="button-row">
+        <%= link_to "Sign Up", "/sign_up", class: "homepage-button" %>
+        <%= link_to "Log In", "/log_in", class: "homepage-button" %>
+        <%= link_to "Continue as Guest", "/start", class: "homepage-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

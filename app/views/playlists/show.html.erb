@@ -1,0 +1,179 @@
+<style>
+  .playlist-frame {
+    position: relative;
+    z-index: 0;
+    padding: 6vh 6vw;
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .playlist-frame::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, <%= [@the_playlist.color1, @the_playlist.color2, @the_playlist.color3, @the_playlist.color4, @the_playlist.color5].compact.join(', ') %>);
+    background-size: 300% 300%;
+    animation: spin-gradient 8s linear infinite;
+  }
+
+  @keyframes spin-gradient {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .playlist-container {
+    background-color: black;
+    color: white;
+    padding: 3rem;
+    border-radius: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .playlist-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .nav-links a {
+    color: #60a5fa;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .track-card {
+    background-color: #1e293b;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease;
+  }
+
+  .track-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .track-card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .track-info {
+    padding: 0.75rem 1rem;
+  }
+
+  .track-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .track-artist {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+  }
+
+  .playlist-meta {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-top: 1.5rem;
+  }
+</style>
+
+<div class="playlist-frame">
+  <div class="playlist-container">
+    <div class="playlist-header">
+      <h1 class="playlist-title">
+        Your playlist that smells like
+        <% if @the_playlist.scent1.present? %>
+          <span class="scent-<%= @the_playlist.scent1.parameterize %>"><%= @the_playlist.scent1 %></span>
+        <% else %>
+          <span class="text-red-400">[missing scent]</span>
+        <% end %>
+        and
+        <% if @the_playlist.scent2.present? %>
+          <span class="scent-<%= @the_playlist.scent2.parameterize %>"><%= @the_playlist.scent2 %></span>
+        <% else %>
+          <span class="text-red-400">[missing scent]</span>
+        <% end %>
+        and feels like
+        <% if @the_playlist.texture.present? %>
+          <span class="texture-<%= @the_playlist.texture.parameterize %>"><%= @the_playlist.texture %></span>
+        <% else %>
+          <span class="text-red-400">[missing texture]</span>
+        <% end %>
+      </h1>
+
+      <div class="nav-links">
+        <%= button_to "Delete", "/delete_playlist/#{@the_playlist.id}", method: :delete, data: { confirm: "Are you sure?" }, class: "delete-button" %>
+      </div>
+
+    </div>
+
+    <div class="grid">
+      <% (1..8).each do |i| %>
+        <% title = @the_playlist["song#{i}"] %>
+        <% artist = @the_playlist["artist#{i}"] %>
+        <% query = URI.encode_www_form_component("#{title} #{artist}") %>
+        <% cover = @the_playlist["album_art#{i}"] || "https://source.boringavatars.com/marble/300/#{query}" %>
+        <% if title.present? && artist.present? %>
+          <div class="track-card">
+            <img src="<%= cover %>" alt="<%= title %> album cover">
+            <div class="track-info">
+              <p class="track-title"><%= title %></p>
+              <p class="track-artist"><%= artist %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="edit-button-row">
+      <%= link_to "Edit Colors", "/playlists/#{@the_playlist.id}/colors", class: "btn-next" %>
+      <%= link_to "Edit Scents", "/playlists/#{@the_playlist.id}/scents", class: "btn-next" %>
+      <%= link_to "Edit Texture", "/playlists/#{@the_playlist.id}/textures", class: "btn-next" %>
+    </div>
+
+    <!-- Create Playlist Button -->
+    <div class="mt-6 mb-8 text-center">
+      <%= link_to "Create New Playlist", "/start", class: "generate-button" %>
+    </div>
+
+
+    <div class="playlist-meta">
+<!--      <p><strong>Likes:</strong> <%#= @the_playlist.likes_count %></p>
+-->      <p><strong>Created:</strong> <%= time_ago_in_words(@the_playlist.created_at) %> ago</p>
+      <p><strong>Updated:</strong> <%= time_ago_in_words(@the_playlist.updated_at) %> ago</p>
+    </div>
+  </div>
+</div>

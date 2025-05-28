@@ -1,0 +1,153 @@
+<style>
+  .texture-gradient-frame {
+    position: relative;
+    z-index: 0;
+    padding: 3vh 6vw 6vh;
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .texture-gradient-frame::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, <%= [@playlist.color1, @playlist.color2, @playlist.color3, @playlist.color4, @playlist.color5].compact.join(', ') %>);
+    background-size: 300% 300%;
+    animation: spin-gradient 6s linear infinite;
+  }
+
+  .texture-container {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .texture-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+  .texture-option {
+    flex: 0 1 200px;
+  }
+
+  .texture-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .texture-option input[type="radio"] {
+    display: none;
+  }
+
+  .texture-option label img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+  }
+
+  .texture-option label img:hover {
+    filter: grayscale(40%);
+  }
+
+  .texture-option input[type="radio"]:checked + label img {
+    filter: grayscale(0%);
+  }
+
+  .texture-label {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    width: 180px;
+    text-align: center;
+  }
+
+  .submit-button {
+    margin-top: 2rem;
+  }
+
+  .generate-button {
+    background-color: #22c55e;
+    color: white;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .generate-button:hover {
+    background-color: #15803d;
+  }
+
+  /* Center row of 2 */
+  .texture-grid > .texture-option:nth-child(4) {
+    grid-column: 2;
+  }
+  .texture-grid > .texture-option:nth-child(5) {
+    grid-column: 3;
+  }
+
+  @keyframes spin-gradient {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>
+
+<div class="texture-gradient-frame">
+  <div class="texture-container">
+    <h1 class="text-3xl font-semibold mb-4">Last step — tell me what texture you want your music to feel like.</h1>
+    <p class="text-lg mb-8">Select 1 texture</p>
+
+    <form action="/playlists/<%= @playlist.id %>/textures" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <% textures = ["Velvet", "Silk", "Steel", "Wood", "Fleece"] %>
+
+      <div class="texture-grid">
+        <% textures.each_with_index do |texture, index| %>
+          <div class="texture-option">
+            <input type="radio"
+                   id="texture_<%= index %>"
+                   name="texture"
+                   value="<%= texture %>" />
+
+            <label for="texture_<%= index %>">
+              <%= image_tag("textures/#{texture.parameterize}.jpg", alt: texture) %>
+            </label>
+
+            <div class="texture-label"><%= texture %></div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="submit-button">
+        <button type="submit" class="generate-button">
+          Generate my playlist →
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

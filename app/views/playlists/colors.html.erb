@@ -1,0 +1,23 @@
+<div class="color-page">
+  <div class="color-box">
+    <h1 class="color-title">What colors do you want to see in your music?</h1>
+    <p class="color-subtitle">Choose any 5 colors</p>
+
+    <form action="/playlists/<%= @playlist.id %>/colors" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <div class="color-circle-row">
+        <% 1.upto(5) do |i| %>
+          <div class="color-circle-wrapper">
+            <input type="color" name="color<%= i %>" class="color-input" title="Color <%= i %>">
+            <span class="color-label"><%= i %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="color-next-button">
+        <button type="submit" class="btn-next">Next →</button>
+      </div>
+    </form>
+  </div>
+</div>

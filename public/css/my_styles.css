@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Syne:wght@500&display=swap');
+
+body {
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1, h2, h3, nav, .navbar a, .nav-link {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Apply to all buttons globally */
+button, .btn, .generate-button, .btn-next, .delete-button {
+  border-radius: 9999px !important;  /* Fully rounded pill shape */
+  margin: 0.75rem;
+  display: inline-block;
+}
+
+/* Background + layout */
+.homepage-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff6a00, #ee0979, #00c9ff, #92fe9d);
+  background-size: 300% 300%;
+  animation: backgroundShift 15s ease infinite;
+  font-family: 'DM Sans', sans-serif;
+  text-align: center;
+  padding: 2rem;
+}
+
+@keyframes backgroundShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Text styles */
+.title-stack {
+  margin-bottom: 1rem;
+}
+.homepage-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.homepage-subtitle {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.homepage-button {
+  background-color: black;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.homepage-button:hover {
+  background-color: #333;
+}
+
+.title-stack {
+  margin-bottom: 2rem;
+}
+
+.homepage-title {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+
+.filled {
+  color: white;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.outlined {
+  color: transparent;
+  -webkit-text-stroke: 1px white;
+  text-stroke: 1px white; /* Fallback */
+}
+
+.homepage-subtitle-secondary {
+  font-size: 1.125rem;
+  color: #000000;
+  text-align: center;
+  margin-top: 0.2rem;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* GRAY NEXT BUTTON */
+.btn-next {
+  background-color: #333;
+  color: white;
+  border-radius: 0.5rem;
+  font-family: 'Open Sans', sans-serif;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-next:hover {
+  background-color: #555;
+}
+
+/* GREEN GENERATE BUTTON */
+.generate-button {
+  background-color: #6eab7c;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.generate-button:hover {
+  background-color: #386b44;
+}
+
+/* RED DELETE BUTTON */
+.delete-button {
+  background-color: #dc2626; /* Tailwind red-600 */
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #991b1b; /* Tailwind red-800 */
+}
+
+
+/* FONT COLOR CODE */
+/* Scents */
+.scent-vanilla { color: #f3e5ab; }      /* light creamy beige */
+.scent-lavender { color: #b57edc; }     /* soft lavender purple */
+.scent-coconut { color: #fff8dc; }      /* coconut cream / cornsilk */
+.scent-sandalwood { color: #c4a986cd; }   /* warm tan / burlywood */
+.scent-rain { color: #f0dc73; }         /* soft blue-gray */
+.scent-citrus-zest { color: #ffa500; }  /* vibrant orange */
+.scent-green-tea { color: #7bb274; }    /* muted green */
+.scent-coffee { color: #a58670; }       /* coffee brown */
+.scent-leather { color: #796e6c; }      /* saddle brown */
+.scent-gasoline { color: #7a6a86; }     /* deep indigo / petroleum */
+
+
+/* Textures */
+.texture-velvet { color: #c33646; }    /* deep pink */
+.texture-steel { color: #a4abb4; }     /* light steel blue */
+.texture-fleece { color: #ffdab9; }    /* peach puff */
+.texture-wood { color: #a18775; } /* tan */
+.texture-silk { color: #dbbff8; }      /* khaki */
+
+.profile-container {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  padding: 8rem;
+  color: white;
+  background-color: #21222d;
+  /* border-radius: 1rem; */
+  font-family: 'DM Sans', sans-serif;
+}
+
+.profile-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.profile-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Playlist card with animated border */
+.playlist-card {
+  position: relative;
+  display: block;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: black;
+  color: white;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease;
+  z-index: 0;
+}
+
+/* Gradient animated border container */
+.playlist-border {
+  padding: 2px;
+  border-radius: 18px;
+  background: var(--gradient);
+  background-size: 300% 300%;
+  animation: spin-border 6s linear infinite;
+  position: relative;
+}
+
+@keyframes spin-border {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+@keyframes border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.playlist-wrapper {
+  margin: 1rem 0; /* Adds vertical space between playlist cards */
+  padding: 0.5rem; /* Adds space around the card inside the wrapper */
+}
+
+
+.playlist-meta {
+  flex: 1;
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.playlist-desc {
+  flex: 4;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.edit-button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem; /* spacing between buttons */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.incomplete-tag {
+  color: #fbbf24; /* Tailwind's yellow-400 */
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.color-page {
+  background-color: #21222d; /* dark gray */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+}
+
+.color-box {
+  background-color: black;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 720px;
+}
+
+.color-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.color-subtitle {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.color-circle-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.color-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 60px;
+}
+
+.color-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Remove the inner square in WebKit browsers */
+.color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+/* Remove the inner square in Firefox */
+.color-input::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.color-label {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: white;
+}
+
+.color-next-button {
+  margin-top: 1.5rem;
+}
