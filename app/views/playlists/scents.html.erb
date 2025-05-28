@@ -107,10 +107,11 @@
         <% scents.each_with_index do |scent, index| %>
           <div class="scent-option">
             <input type="checkbox"
-                   id="scent_<%= index %>"
-                   name="scent<%= index < 5 ? 1 : 2 %>"
-                   value="<%= scent %>"
-                   class="scent-checkbox" />
+                id="scent_<%= index %>"
+                name="scents[]"
+                value="<%= scent %>"
+                class="scent-checkbox" />
+
 
             <label for="scent_<%= index %>">
               <%= image_tag("scents/#{scent.parameterize}.jpg", alt: scent) %>

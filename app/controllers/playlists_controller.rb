@@ -118,8 +118,10 @@ class PlaylistsController < ApplicationController
   def update_scents
     @playlist = Playlist.find_by(id: params[:path_id])
 
-    @playlist.scent1 = params[:scent1]
-    @playlist.scent2 = params[:scent2]
+    selected_scents = params[:scents] || []
+    @playlist.scent1 = selected_scents[0]
+    @playlist.scent2 = selected_scents[1]
+    @playlist.save
 
     if @playlist.save
       redirect_to("/playlists/#{@playlist.id}/textures")
